@@ -36,6 +36,9 @@ if [ "$1" = '/opt/couchdb/bin/couchdb' ]; then
 	if [ ! -z "$NODENAME" ] && ! grep "couchdb@" /opt/couchdb/etc/vm.args; then
 		echo "-name couchdb@$NODENAME" >> /opt/couchdb/etc/vm.args
 	fi
+	if [ ! -z "$ERLANGCOOKIE" ] && ! grep "-setcookie" /opt/couchdb/etc/vm.args; then
+		echo "-setcookie $ERLANGCOOKIE" >> /opt/couchdb/etc/vm.args
+	fi
 
 	# Ensure that CouchDB will write custom settings in this file
 	touch /opt/couchdb/etc/local.d/docker.ini
